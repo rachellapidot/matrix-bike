@@ -16,19 +16,21 @@ function App() {
           <span className="second-sub-title">Stolen Bykes</span>
         </div>
       </div>
-      <Router>
-        <Switch>
-          {/* <Route path="/about">
-            <About />
-          </Route>
-          <Route path="/users">
-            <Users />
-          </Route> */}
-          <Route path="/">
-            <Home />
-          </Route>
-        </Switch>
-      </Router>
+      <div className="wrapper">
+        <Router>
+          <Switch>
+            {/* <Route path="/about">
+              <About />
+            </Route>
+            <Route path="/users">
+              <Users />
+            </Route> */}
+            <Route path="/">
+              <Home />
+            </Route>
+          </Switch>
+        </Router>
+      </div>
     </div>
   );
 }

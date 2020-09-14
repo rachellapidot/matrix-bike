@@ -1,21 +1,36 @@
+import 'date-fns';
 import React, { useEffect, useState } from "react";
 import moment from "moment"
+import DatePicker from "../datePicker"
 import Loader from "./../loader"
 import { getBykes } from "../../rest_api/api"
 import "./home.css"
 const Home = () => {
     const [loading, setLoading] = useState(true)
     const [data, setData] = useState();
+    const [index, setIndex] = useState(1)
 
     useEffect(()=>{
+        setLoading(true)
         getBykes({
-            page: 1,
+            page: index,
             per_page: 10,
         }).then((res)=>{
+            console.log(res)
             setData(res?.data?.incidents)
             setLoading(false)
         }).catch(e=>console.log("Error: ", e))
-    },[])
+    },[index])
+
+    const incIndex = () => {
+        setIndex(index+1)
+    }
+
+    const decIndex = () => {
+        if(index>2){
+            setIndex(index-1)
+        }
+    }
 
 
     const renderList = () => {
@@ -26,8 +41,8 @@ const Home = () => {
                     <span className="description">{item.description}</span>
                 </div>
                 <div className="theft-details">
-                    <div className="date"><img className="date-icon" src={require("../../images/accored.png")} />(Accorded) {moment.unix(item.occurred_at).format("DD-MM-YYYY")}</div>
-                    <div className="date"><img className="date-icon" src={require("../../images/update.png")} />(Updated) {moment.unix(item.updated_at).format("DD-MM-YYYY")}</div>
+                    <div className="date"><img className="date-icon" src={require("../../images/calendar.png")} />(Accorded) {moment.unix(item.occurred_at).format("DD-MM-YYYY")}</div>
+                    <div className="date"><img className="date-icon" src={require("../../images/calendar.png")} />(Updated) {moment.unix(item.updated_at).format("DD-MM-YYYY")}</div>
                     <span className="description"><img className="location" src={require("../../images/location.png")} alt="location"/>{item.address}</span> 
                 </div>
         </div>)
@@ -36,12 +51,14 @@ const Home = () => {
     return loading? <Loader /> : 
     <div>
         <div className="wrapper">
-            {/* <tr>
-                <th></th>
-                <th>Byke Details</th>
-                <th>Theft Details</th>
-            </tr> */}
-            
+            <div>
+                <DatePicker />
+            </div>
+            <div className="paging">
+                <img onClick={decIndex} className="arrow" alt="dec" src={require("../../images/left-arrow.png")} />
+                page {index} out of ....
+                <img onClick={incIndex} className="arrow" alt="inc" src={require("../../images/next.png")} />
+            </div>            
             {renderList()}
             
         </div>

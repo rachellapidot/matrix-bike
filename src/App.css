@@ -2,10 +2,17 @@
   display: flex;
   background-color: #ffd47c;
   padding: 1rem;
+  position: fixed;
+  width: 100%;
+  z-index: 1;
+}
+.wrapper {
+  padding-top: 6rem;
+ 
 }
 .police-logo {
-  width: 8rem;
-  height: 8rem;
+  width: 6rem;
+  height: 6rem;
 }
 .police-title{
   flex: 1;
