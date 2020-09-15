@@ -12,3 +12,16 @@ export const getBykes = (params) => {
     });
 }
 
+export const getById = (id) => {
+    return axios.get(`${MAIN}/${id}`)
+}
+
+// export const getMap = (params) => {
+//     return axios.get("https://www.mapquestapi.com/staticmap/v5/map",{
+//         params,
+//         headers:{
+//             "Access-Control-Allow-Origin" : "*",
+//             "Accept":"*/*"
+//         }
+//     })
+// }

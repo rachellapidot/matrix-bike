@@ -6,6 +6,8 @@ import {
 } from "react-router-dom";
 import Home from "./components/home/index"
 import "./App.css"
+import BikeDetais from './components/bikeDetails/index';
+import { Redirect } from 'react-router-dom/cjs/react-router-dom.min';
 function App() {
   return (
     <div className="App">
@@ -19,15 +21,15 @@ function App() {
       <div className="wrapper">
         <Router>
           <Switch>
-            {/* <Route path="/about">
-              <About />
+            
+             <Route path="/bikes/:id">
+              <BikeDetais />
             </Route>
-            <Route path="/users">
-              <Users />
-            </Route> */}
-            <Route path="/">
+            
+            <Route path="/bikes">
               <Home />
             </Route>
+            <Route path="/"><Redirect to="/bikes" /></Route>
           </Switch>
         </Router>
       </div>
